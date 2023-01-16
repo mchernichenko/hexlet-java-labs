@@ -1,0 +1,19 @@
+# Настройки ORM https://ebean.io/docs/intro/configuration/
+datasource:
+  # Задаём базу данных, к которой будет происходить подключение
+  db:
+    username: ""
+    password: ""
+    url: "jdbc:h2:./hexlet"
+  db_test:
+    username: "postgres"
+    password: "postgres"
+    url: "jdbc:postgresql://172.20.127.90:5432/hexlet_db"
+
+# Заполняем базу данных первоначальными данными
+ebean:
+  db:
+    ddl:
+      generate: true
+      run: true
+      seedSql: seed.sql

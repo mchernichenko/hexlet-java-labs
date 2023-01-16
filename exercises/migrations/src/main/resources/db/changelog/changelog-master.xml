@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+    <!-- BEGIN -->
+    <!-- Тег указывает начало единицы изменений -->
+    <!-- ChangeSet представляет из себя аналог коммита в системах контроля версий-->
+    <!-- По аналогии с коммитом, изменения, которые были внесены в рамках одного changeSet-а можно накатить или откатить (rollback) на сервер БД.-->
+    <!-- У каждого changeSet-а должен быть уникальный идентификатор при помощи которого Liquibase определяет был ли данный changeSet накачен на данную БД или нет.-->
+    <changeSet id="1" author="liquibase">
+        <!-- Создаём таблицу с указынным именем -->
+        <createTable tableName="person">
+            <!-- Создаём столбцы таблицы -->
+            <!-- Указываем имя и тип данных в столбце -->
+            <!-- Указываем что значение поля генерируется автоматически -->
+            <column name="id" type="bigint" autoIncrement="true">
+                <!-- Указываем, что значение является первичным ключом -->
+                <constraints primaryKey="true"/>
+            </column>
+            <!-- Создаём остальные столбцы -->
+            <column  name="first_name"  type="varchar(250)"/>
+            <column  name="last_name"  type="varchar(250)"/>
+        </createTable>
+    </changeSet>
+    <!-- END -->
+</databaseChangeLog>

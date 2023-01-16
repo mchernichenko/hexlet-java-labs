@@ -1,0 +1,19 @@
+# Настройки ORM
+datasource:
+  # Задаём базу данных, к которой будет происходить подключение
+  db:
+    username: ""
+    password: ""
+    url: "jdbc:h2:./hexlet;AUTO_SERVER=TRUE"
+  db_ps:
+    username: "postgres"
+    password: "postgres"
+    url: "jdbc:postgresql://172.25.120.42:5432/hexlet_db"
+
+# Заполняем базу данных первоначальными данными
+ebean:
+  db:
+    ddl:
+      run: true
+      generate: true
+      seedSql: seed.sql

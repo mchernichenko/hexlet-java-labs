@@ -1,0 +1,27 @@
+server:
+  port: ${PORT:5000}
+
+logging:
+  level:
+    root: INFO
+
+spring:
+  datasource:
+    #url: jdbc:h2:~/Hexlet/java/exercises/authentication/hexlet_db # URL для запуска приложения из IDEA (временный)
+    #url: jdbc:postgresql://192.168.150.241:5432/hexletdb
+    url: jdbc:h2:./hexlet
+    username: sa
+    password:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+
+  liquibase:
+    change-log: classpath:db/changelog/changelog-master.xml
+  h2:
+    console:
+      enabled: true
+      path: /h2console/
+      settings:
+        web-allow-others: true

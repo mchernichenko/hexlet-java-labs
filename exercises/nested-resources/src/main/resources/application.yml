@@ -1,0 +1,35 @@
+server:
+  port: ${PORT:5000}
+
+logging:
+  level:
+    root: INFO
+    org:
+      hibernate:
+        #SQL: DEBUG # вроде как аналогично spring.jpa.show-sql: true
+        type:
+          descriptor.sql.BasicBinder: TRACE # логирование значений параметров запроса
+
+spring:
+  datasource:
+    url: jdbc:h2:./hexlet
+    username: sa
+    password:
+  jpa:
+    show-sql: true # It is used to display the executed SQL statements to console.
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true # to make the printing SQL beautify
+        #show-sql: true  # не ясен смысл, т.е. не работает без spring.jpa.show-sql: true
+        use_sql_comments: false # If enabled, the Hibernate generate comments inside the SQL. It is used to make debugging easier.
+
+  liquibase:
+    change-log: classpath:db/changelog/changelog-master.xml
+  h2:
+    console:
+      enabled: true
+      path: /h2console/
+      settings:
+        web-allow-others: true

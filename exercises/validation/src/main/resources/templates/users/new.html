@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layouts/application.html}">
+
+<head>
+  <title>New user</title>
+</head>
+<!-- Layout — это диалект Thymeleaf, который позволяет пользователям создавать макеты и шаблоны для повторного использования HTML кода -->
+<!-- это динамический фрагмент html, который вставляется под каждым полем, которое заполнено неправильно -->
+<!-- на вход которого передаётся #object, значение которого определяется тегом th:object -->
+<div class="invalid-feedback" layout:fragment="validation-errors">
+  <ul>
+    <!-- getMessage это метод объекта ValidationError -->
+    <!-- #object в нашем случае это List<ValidationError>, а error - это элемент листа ValidationError -->
+    <!-- если ошибок нет, то список пустой и ни одного элемента неупонядоченного списка не будет, т.е. будет пустой div -->
+    <li th:each="error : ${#object}" th:text="${error.getMessage()}"></li>об
+  </ul>
+</div>
+
+<section layout:fragment="content">
+  <h1>Создать нового пользователя</h1>
+  <form th:object="${user}" action="/users" method="post">
+    <div class="mb-3">
+      <label>Имя</label>
+      <!-- Подсвечиваем input красным путём добавления класса 'is-invalid', если есть ошибка с key=firstName -->
+      <input
+        class="form-control" th:classappend="${errors.firstName}? 'is-invalid'"
+        type="text" name="firstName" th:value="*{firstName}"
+      >
+      <!-- Добавляем список ошибок под каждым полем, которое заполнено неправильно -->
+      <!-- это динамический фрагмент в который передаётся объект List<ValidationError> -->
+      <div layout:fragment="validation-errors" th:object="${errors.firstName}"></div>
+    </div>
+    <div class="mb-3">
+      <label>Фамилия</label>
+      <input
+        class="form-control" th:classappend="${errors.lastName}? 'is-invalid'"
+        type="text" name="lastName" th:value="*{lastName}"
+      >
+      <div layout:fragment="validation-errors" th:object="${errors.lastName}"></div>
+    </div>
+    <div class="mb-3">
+      <label>Почта</label>
+      <input
+        class="form-control" th:classappend="${errors.email}? 'is-invalid'"
+        type="text" name="email" th:value="*{email}"
+      >
+      <div layout:fragment="validation-errors" th:object="${errors.email}"></div>
+    </div>
+    <div class="mb-3">
+      <label>Пароль</label>
+      <input
+        class="form-control" th:classappend="${errors.password}? 'is-invalid'"
+        type="password" name="password" th:value="*{password}"
+      >
+      <div layout:fragment="validation-errors" th:object="${errors.password}"></div>
+    </div>
+    <button class="btn btn-primary" type="submit">Создать</button>
+  </form>
+</section>
